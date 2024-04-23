@@ -2,6 +2,50 @@
 
 namespace App\Entity;
 
+/**
+ * @OA\Schema(
+ *     schema="User",
+ *     type="object",
+ *     title="User",
+ *     description="User entity schema",
+ *     required={"id", "email", "firstName", "lastName", "type"},
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         format="int64",
+ *         description="Unique identifier for the user"
+ *     ),
+ *     @OA\Property(
+ *         property="email",
+ *         type="string",
+ *         format="email",
+ *         description="User email address"
+ *     ),
+ *     @OA\Property(
+ *         property="firstName",
+ *         type="string",
+ *         description="User's first name"
+ *     ),
+ *     @OA\Property(
+ *         property="lastName",
+ *         type="string",
+ *         description="User's last name"
+ *     ),
+ *     @OA\Property(
+ *         property="type",
+ *         type="string",
+ *         enum={"student", "teacher", "admin"},
+ *         description="The type of user"
+ *     ),
+ *     @OA\Property(
+ *         property="password",
+ *         type="string",
+ *         description="User password, not generally returned in responses for security reasons",
+ *         example="examplePassword123!",
+ *         writeOnly=true
+ *     )
+ * )
+ */
 final class User
 {
     private $id;
@@ -51,7 +95,6 @@ final class User
         return json_decode(json_encode([
             'id' => $this->id,
             'email' => $this->email,
-            'password' => $this->password,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
             'type' => $this->type,

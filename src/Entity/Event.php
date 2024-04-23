@@ -9,7 +9,6 @@ final class Event
     private $teacherId;
     private $groupId;
     private $roomId;
-    private $startDate;
     private $startTime;
     private $endTime;
     private $type;
@@ -44,11 +43,6 @@ final class Event
         return $this->roomId;
     }
 
-    public function getStartDate(): \DateTime
-    {
-        return new \DateTime($this->startDate);
-    }
-
     public function getStartTime(): \DateTime
     {
         return new \DateTime($this->startTime);
@@ -72,7 +66,6 @@ final class Event
             'teacherId' => $this->teacherId,
             'groupId' => $this->groupId,
             'roomId' => $this->roomId,
-            'startDate' => $this->startDate,
             'startTime' => $this->startTime,
             'endTime' => $this->endTime,
             'type' => $this->type,

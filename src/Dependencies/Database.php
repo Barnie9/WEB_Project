@@ -3,8 +3,8 @@
 $container['db'] = function (): PDO {
     $host = 'localhost'; // Host address
     $dbname = 'web_project'; // Database name
-    $user = 'barnie'; // Database username
-    $pass = 't/g!Wl@4huJm]Uuf'; // Database password
+    $user = 'root'; // Database username
+    $pass = ''; // Database password
 
     // DSN (Data Source Name)
     $dsn = "mysql:host=$host;dbname=$dbname";

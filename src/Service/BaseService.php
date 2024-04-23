@@ -14,4 +14,9 @@ abstract class BaseService
     {
         return $this->container->get('user_repository');
     }
+
+    public function getMatterRepository()
+    {
+        return $this->container->get('matter_repository');
+    }
 }

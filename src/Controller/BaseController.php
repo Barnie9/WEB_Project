@@ -16,6 +16,11 @@ abstract class BaseController
         return $this->container->get('user_service');
     }
 
+    public function getMatterService()
+    {
+        return $this->container->get('matter_service');
+    }
+
     protected function jsonResponse(
         Response $response,
         string $status,

@@ -17,4 +17,6 @@ require_once 'Dependencies/Repositories.php';
 require_once 'Dependencies/Services.php';
 (require_once 'Dependencies/Routes.php')($app);
 
+require_once 'Seed/Seed.php';
+
 $app->run();

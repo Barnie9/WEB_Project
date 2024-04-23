@@ -12,28 +12,28 @@ final class UserService extends BaseService
         return $this->getUserRepository()->getAllUsers();
     }
 
-    public function getUserByEmail(string $email): User
-    {
-        return $this->getUserRepository()->getUserByEmail($email);
-    }
-
-    public function getUserById(int $id): User
+    public function getUserById(int $id): ?User
     {
         return $this->getUserRepository()->getUserById($id);
     }
 
-    public function createUser($user): User
+    public function getUserByEmail(string $email): ?User
+    {
+        return $this->getUserRepository()->getUserByEmail($email);
+    }
+
+    public function createUser($user): ?User
     {
         $existingUser = $this->getUserRepository()->getUserByEmail($user['email']);
 
-        if ($existingUser->getId() !== null) {
-            return new User();
+        if ($existingUser !== null) {
+            return null;
         }
 
         return $this->getUserRepository()->createUser($user);
     }
 
-    public function updateUser(int $id, $user): User
+    public function updateUser(int $id, $user): ?User
     {
         if ($id !== $user['id']) {
             return new User();
@@ -41,8 +41,8 @@ final class UserService extends BaseService
 
         $existingUser = $this->getUserRepository()->getUserById($user['id']);
 
-        if ($existingUser->getId() === null) {
-            return new User();
+        if ($existingUser === null) {
+            return null;
         }
 
         $user['password'] = isset($user['password']) ? $user['password'] : $existingUser->getPassword();
@@ -57,7 +57,7 @@ final class UserService extends BaseService
     {
         $existingUser = $this->getUserRepository()->getUserById($id);
 
-        if ($existingUser->getId() === null) {
+        if ($existingUser === null) {
             return false;
         }
 

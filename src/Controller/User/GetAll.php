@@ -39,7 +39,7 @@ final class GetAll extends BaseController
         if (isset($email)) {
             $user = $this->getUserService()->getUserByEmail($email);
 
-            if ($user->getId() === null) {
+            if ($user === null) {
                 return $this->jsonResponse($response, 'error', 'User not found', 404);
             }
 

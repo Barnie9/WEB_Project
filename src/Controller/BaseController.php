@@ -16,6 +16,11 @@ abstract class BaseController
         return $this->container->get('user_service');
     }
 
+    public function getEventService()
+    {
+        return $this->container->get('event_service');
+    }
+
     protected function jsonResponse(
         Response $response,
         string $status,

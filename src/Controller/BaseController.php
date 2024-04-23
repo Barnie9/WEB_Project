@@ -16,6 +16,16 @@ abstract class BaseController
         return $this->container->get('user_service');
     }
 
+    public function getGroupsService()
+    {
+        return $this->container->get('group_service');
+    }
+
+    public function getRoomService()
+    {
+        return $this->container->get('room_service');
+    }
+
     protected function jsonResponse(
         Response $response,
         string $status,

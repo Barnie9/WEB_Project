@@ -14,4 +14,15 @@ abstract class BaseService
     {
         return $this->container->get('user_repository');
     }
+
+    public function getGroupsRepository()
+    {
+        return $this->container->get('group_repository');
+    }
+
+    public function getRoomRepository(){
+        return $this->container->get('room_repository');
+    }
+    
+
 }

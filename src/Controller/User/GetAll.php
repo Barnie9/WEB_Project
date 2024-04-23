@@ -8,23 +8,51 @@ use Slim\Http\Response;
 
 /**
  * @OA\Get(
- *     tags={"Users"},
  *     path="/users",
- *     summary="List all users or filter by email address",
- *     parameters={
- *         @OA\Parameter(ref="#/components/parameters/emailQuery")
- *     }
+ *     tags={"users"},
+ *     summary="Retrieve one user by email or all users",
+ *     description="Returns a single user if email is provided or all users if no email is provided.",
+ *     @OA\Parameter(
+ *         name="email",
+ *         in="query",
+ *         description="The email of the user to retrieve",
+ *         required=false,
+ *         @OA\Schema(
+ *             type="string",
+ *             format="email"
+ *         )
+ *     ),
  *     @OA\Response(
  *         response=200,
- *         description="A list of users",
+ *         description="Successful operation",
  *         @OA\JsonContent(
- *             type="array",
- *             @OA\Items(ref="#/components/schemas/User")
+ *             oneOf={
+ *                 @OA\Schema(
+ *                     type="array",
+ *                     description="List of all users",
+ *                     @OA\Items(ref="#/components/schemas/User")
+ *                 ),
+ *                 @OA\Schema(
+ *                     type="object",
+ *                     description="Single user",
+ *                     ref="#/components/schemas/User"
+ *                 )
+ *             }
  *         )
  *     ),
  *     @OA\Response(
  *         response=404,
- *         description="An user with the specified criteria was not found"
+ *         description="User not found",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="code", type="integer", example="404"),
+ *             @OA\Property(property="status", type="string", example="error"),
+ *             @OA\Property(property="message", type="string", example="User not found")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=500,
+ *         description="Internal Server Error"
  *     )
  * )
  */
@@ -39,7 +67,7 @@ final class GetAll extends BaseController
         if (isset($email)) {
             $user = $this->getUserService()->getUserByEmail($email);
 
-            if ($user->getId() === null) {
+            if ($user === null) {
                 return $this->jsonResponse($response, 'error', 'User not found', 404);
             }
 

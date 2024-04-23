@@ -14,4 +14,9 @@ abstract class BaseService
     {
         return $this->container->get('user_repository');
     }
+
+    public function getEventRepository()
+    {
+        return $this->container->get('event_repository');
+    }
 }

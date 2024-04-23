@@ -14,27 +14,21 @@ final class UserRepository extends BaseRepository
         return $statement->fetchAll();
     }
 
-    public function getUserByEmail(string $email): User
-    {
-        $query = 'SELECT * FROM users WHERE email = :email';
-        $statement = $this->db->prepare($query);
-        $statement->execute(['email' => $email]);
-        $user = $statement->fetchObject(User::class);
-        if (!$user) {
-            return new User();
-        }
-        return $user;
-    }
-
-    public function getUserById(int $id): User
+    public function getUserById(int $id): ?User
     {
         $query = 'SELECT * FROM users WHERE id = :id';
         $statement = $this->db->prepare($query);
         $statement->execute(['id' => $id]);
         $user = $statement->fetchObject(User::class);
-        if (!$user) {
-            return new User();
-        }
+        return $user;
+    }
+
+    public function getUserByEmail(string $email): ?User
+    {
+        $query = 'SELECT * FROM users WHERE email = :email';
+        $statement = $this->db->prepare($query);
+        $statement->execute(['email' => $email]);
+        $user = $statement->fetchObject(User::class);
         return $user;
     }
 
@@ -50,7 +44,7 @@ final class UserRepository extends BaseRepository
             'lastName' => $user['lastName'],
             'type' => $user['type']
         ]);
-        return $this->getUserByEmail($user['email']);
+        return $this->getUserById($this->db->lastInsertId());
     }
 
     public function updateUser($user): User

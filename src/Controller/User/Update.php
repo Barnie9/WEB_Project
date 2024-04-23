@@ -19,7 +19,7 @@ final class Update extends BaseController
 
         $user = $this->getUserService()->updateUser($id, $user);
 
-        if ($user->getId() === null) {
+        if ($user === null) {
             return $this->jsonResponse($response, 'error', 'User not found', 404);
         }
 

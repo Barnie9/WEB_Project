@@ -18,7 +18,7 @@ final class Create extends BaseController
 
         $user = $this->getUserService()->createUser($user);
 
-        if ($user->getId() === null) {
+        if ($user === null) {
             return $this->jsonResponse($response, 'error', 'User not created', 400);
         }
 

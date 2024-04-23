@@ -28,6 +28,11 @@ abstract class BaseController
     {
         return $this->container->get('event_service');
     }
+    
+    public function getMatterService()
+    {
+        return $this->container->get('matter_service');
+    }
 
     protected function jsonResponse(
         Response $response,

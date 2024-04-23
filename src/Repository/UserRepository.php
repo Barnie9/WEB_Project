@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\User;
-use PDO;
 
 final class UserRepository extends BaseRepository
 {

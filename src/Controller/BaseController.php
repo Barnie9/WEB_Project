@@ -11,6 +11,11 @@ abstract class BaseController
     {
     }
 
+    public function getUserService()
+    {
+        return $this->container->get('user_service');
+    }
+
     protected function jsonResponse(
         Response $response,
         string $status,

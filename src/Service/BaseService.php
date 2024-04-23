@@ -9,4 +9,9 @@ abstract class BaseService
     public function __construct(protected Container $container)
     {
     }
+
+    public function getUserRepository()
+    {
+        return $this->container->get('user_repository');
+    }
 }

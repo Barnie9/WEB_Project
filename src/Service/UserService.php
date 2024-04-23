@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Service\User;
+namespace App\Service;
 
-use App\Service\User\Base;
 use App\Entity\User;
+use App\Service\BaseService;
 
-final class UserService extends Base
+final class UserService extends BaseService
 {
     public function getAllUsers(): array
     {

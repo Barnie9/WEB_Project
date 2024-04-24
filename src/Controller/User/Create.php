@@ -5,6 +5,34 @@ namespace App\Controller\User;
 use App\Controller\BaseController;
 use Slim\Http\Request;
 use Slim\Http\Response;
+/**
+ * @OA\Post(
+ *     path="/users",
+ *     tags={"User"},
+ *     summary="Create a new user",
+ *     description="Creates a new user.",
+ *     @OA\RequestBody(
+ *         required=true,
+ *         description="User data",
+ *         @OA\JsonContent(ref="#/components/schemas/User")
+ *     ),
+ *     @OA\Response(
+ *         response=201,
+ *         description="User created successfully",
+ *         @OA\JsonContent(ref="#/components/schemas/User")
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Bad request",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="status", type="string", example="error"),
+ *             @OA\Property(property="message", type="string", example="Bad request")
+ *         )
+ *     )
+ * )
+ */
+
 
 final class Create extends BaseController
 {

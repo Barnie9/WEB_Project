@@ -10,10 +10,17 @@ use Slim\Http\Response;
  * @OA\Get(
  *     tags={"Matters"},
  *     path="/matters",
- *     summary="List all matters or filter by client name",
- *     parameters={
- *         @OA\Parameter(ref="#/components/parameters/clientQuery")
- *     }
+ *     summary="List all matters or filter by matter ID",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="query",
+ *         description="ID of the matter to retrieve",
+ *         required=false,
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
+ *     ),
  *     @OA\Response(
  *         response=200,
  *         description="A list of matters",

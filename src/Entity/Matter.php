@@ -2,6 +2,33 @@
 
 namespace App\Entity;
 
+/**
+ * @OA\Schema(
+ *     schema="Matter",
+ *     type="object",
+ *     title="Matter",
+ *     description="Matter entity schema",
+ *     required={"id", "title", "type"},
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         format="int64",
+ *         description="Unique identifier for the matter"
+ *     ),
+ *     @OA\Property(
+ *         property="title",
+ *         type="string",
+ *         description="Title of the matter"
+ *     ),
+ *     @OA\Property(
+ *         property="type",
+ *         type="string",
+ *         description="Type of the matter"
+ *     )
+ * )
+ */
+
+
 final class Matter
 {
     private $id;

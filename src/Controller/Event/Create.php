@@ -5,6 +5,45 @@ namespace App\Controller\Event;
 use App\Controller\BaseController;
 use Slim\Http\Request;
 use Slim\Http\Response;
+/**
+ * @OA\Post(
+ *     path="/events",
+ *     tags={"Event"},
+ *     summary="Create a new event",
+ *     description="Creates a new event.",
+ *     @OA\RequestBody(
+ *         required=true,
+ *         description="Event data to create",
+ *         @OA\JsonContent(ref="#/components/schemas/Event")
+ *     ),
+ *     @OA\Response(
+ *         response=201,
+ *         description="Successful operation",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(
+ *                 property="status",
+ *                 type="string",
+ *                 example="success"
+ *             ),
+ *             @OA\Property(
+ *                 property="data",
+ *                 ref="#/components/schemas/Event"
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Bad request",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="status", type="string", example="error"),
+ *             @OA\Property(property="message", type="string", example="Bad request")
+ *         )
+ *     )
+ * )
+ */
+
 
 final class Create extends BaseController
 {

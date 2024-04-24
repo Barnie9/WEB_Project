@@ -2,6 +2,59 @@
 
 namespace App\Entity;
 
+/**
+ * @OA\Schema(
+ *     schema="Event",
+ *     type="object",
+ *     title="Event",
+ *     description="Event entity schema",
+ *     required={"id", "matterId", "teacherId", "groupId", "roomId", "startTime", "endTime", "type"},
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         format="int64",
+ *         description="Unique identifier for the event"
+ *     ),
+ *     @OA\Property(
+ *         property="matterId",
+ *         type="integer",
+ *         description="Identifier for the matter associated with the event"
+ *     ),
+ *     @OA\Property(
+ *         property="teacherId",
+ *         type="integer",
+ *         description="Identifier for the teacher associated with the event"
+ *     ),
+ *     @OA\Property(
+ *         property="groupId",
+ *         type="integer",
+ *         description="Identifier for the group associated with the event"
+ *     ),
+ *     @OA\Property(
+ *         property="roomId",
+ *         type="integer",
+ *         description="Identifier for the room associated with the event"
+ *     ),
+ *     @OA\Property(
+ *         property="startTime",
+ *         type="string",
+ *         format="date-time",
+ *         description="Start time of the event (in ISO 8601 format)"
+ *     ),
+ *     @OA\Property(
+ *         property="endTime",
+ *         type="string",
+ *         format="date-time",
+ *         description="End time of the event (in ISO 8601 format)"
+ *     ),
+ *     @OA\Property(
+ *         property="type",
+ *         type="string",
+ *         description="Type of the event"
+ *     )
+ * )
+ */
+
 final class Event
 {
     private $id;

@@ -2,6 +2,38 @@
 
 namespace App\Entity;
 
+
+/**
+ * @OA\Schema(
+ *     schema="Groups",
+ *     type="object",
+ *     title="Groups",
+ *     description="Groups entity schema",
+ *     required={"id", "programme", "number", "type"},
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         format="int64",
+ *         description="Unique identifier for the group"
+ *     ),
+ *     @OA\Property(
+ *         property="programme",
+ *         type="string",
+ *         description="Programme of the group"
+ *     ),
+ *     @OA\Property(
+ *         property="number",
+ *         type="string",
+ *         description="Number of the group"
+ *     ),
+ *     @OA\Property(
+ *         property="type",
+ *         type="string",
+ *         description="Type of the group"
+ *     )
+ * )
+ */
+
 final class Groups
 {
     private $id;

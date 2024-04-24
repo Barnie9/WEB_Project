@@ -6,6 +6,43 @@ use App\Controller\BaseController;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
+/**
+ * @OA\Delete(
+ *     path="/events/{id}",
+ *     tags={"Event"},
+ *     summary="Delete an event by ID",
+ *     description="Deletes an event by its ID.",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID of the event to delete",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=204,
+ *         description="Successful operation",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="status", type="string", example="success"),
+ *             @OA\Property(property="message", type="string", example="Event deleted")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Event not found",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="status", type="string", example="error"),
+ *             @OA\Property(property="message", type="string", example="Event not found")
+ *         )
+ *     )
+ * )
+ */
+
 final class Delete extends BaseController
 {
     public function __invoke(Request $request, Response $response): Response

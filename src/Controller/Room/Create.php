@@ -12,7 +12,7 @@ final class Create extends BaseController
     {
 
         $data = $request->getParsedBody();
-        if(!isset($data['id']) || !isset($data['name'])) {
+        if(!isset($data['name'])) {
             return $this->jsonResponse($response, 'error', 'Invalid data', 400);
         }
 

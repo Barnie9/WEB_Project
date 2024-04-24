@@ -36,7 +36,7 @@ class RoomRepository extends BaseRepository
             'name' => $room['name']
         ]);
 
-        return $this->getRoomById($room['id']);
+        return $this->getRoomById($this->db->lastInsertId());
         
     }
 

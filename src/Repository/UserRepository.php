@@ -14,12 +14,15 @@ final class UserRepository extends BaseRepository
         return $statement->fetchAll();
     }
 
-    public function getUserById(int $id): ?User
+    public function getUserById(int $id): User
     {
         $query = 'SELECT * FROM users WHERE id = :id';
         $statement = $this->db->prepare($query);
         $statement->execute(['id' => $id]);
         $user = $statement->fetchObject(User::class);
+        if (!$user) {
+            return new User();
+        }
         return $user;
     }
 

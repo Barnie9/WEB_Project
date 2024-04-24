@@ -14,10 +14,6 @@ final class Update extends BaseController
         $id = $request->getAttribute('id');
         $data = $request->getParsedBody();
 
-        if(!isset($data['name']) || !isset($data['type'])) {
-            return $this->jsonResponse($response, 'error', 'Invalid data', 400);
-        }
-
         $group = $this->getGroupsService()->updateGroup($id, $data);
 
         if ($group->getId() === null) {

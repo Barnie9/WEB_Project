@@ -14,7 +14,7 @@ final class GetById extends BaseController
 
         $user = $this->getUserService()->getUserById($id);
 
-        if ($user === null) {
+        if ($user->getId() === null) {
             return $this->jsonResponse($response, 'error', 'User not found', 404);
         }
 

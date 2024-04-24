@@ -14,12 +14,15 @@ final class EventRepository extends BaseRepository
         return $statement->fetchAll();
     }
 
-    public function getEventById(int $id): ?Event
+    public function getEventById(int $id): Event
     {
         $query = 'SELECT * FROM events WHERE id = :id';
         $statement = $this->db->prepare($query);
         $statement->execute(['id' => $id]);
         $event = $statement->fetchObject(Event::class);
+        if (!$event) {
+            return new Event();
+        }
         return $event;
     }
 

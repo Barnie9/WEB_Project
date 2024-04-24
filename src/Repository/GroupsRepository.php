@@ -15,7 +15,7 @@ final class GroupsRepository extends BaseRepository
         
     }
 
-    public function getGroupById(int $id): Groups
+    public function getGroupById($id): Groups
     {
         $stmt = $this->db->prepare('SELECT * FROM groups WHERE id = :id');
         $stmt->execute(['id' => $id]);
@@ -25,26 +25,19 @@ final class GroupsRepository extends BaseRepository
             return new Groups();
         }
 
-        $groupEntity = new Groups();
-        $groupEntity->setId($group['id']);
-        $groupEntity->setProgramme($group['programme']);
-        $groupEntity->setNumber($group['number']);
-        $groupEntity->setType($group['type']);
-
-        return $groupEntity;
+        return $group;
     }
 
     public function createGroup($group): Groups
     {
-        $stmt = $this->db->prepare('INSERT INTO groups VALUES (:id, :programme, :number, :type)');
+        $stmt = $this->db->prepare('INSERT INTO groups VALUES (:programme, :number, :type)');
         $stmt->execute([
-            'id' => null,
             'programme' => $group['programme'],
             'number' => $group['number'],
             'type' => $group['type']
         ]);
 
-        return $this->getGroupById((int)$this->db->lastInsertId());
+        return $this->getGroupById($this->db->lastInsertId());
     }
 
     public function updateGroup($group): Groups

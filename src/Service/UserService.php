@@ -12,7 +12,7 @@ final class UserService extends BaseService
         return $this->getUserRepository()->getAllUsers();
     }
 
-    public function getUserById(int $id): ?User
+    public function getUserById(int $id): User
     {
         return $this->getUserRepository()->getUserById($id);
     }

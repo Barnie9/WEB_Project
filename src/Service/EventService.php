@@ -12,7 +12,7 @@ final class EventService extends BaseService
         return $this->getEventRepository()->getAllEvents();
     }
 
-    public function getEventById(int $id): ?Event
+    public function getEventById(int $id): Event
     {
         return $this->getEventRepository()->getEventById($id);
     }

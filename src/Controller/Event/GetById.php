@@ -14,7 +14,7 @@ final class GetById extends BaseController
 
         $event = $this->getEventService()->getEventById($id);
 
-        if ($event === null) {
+        if ($event->getId() === null) {
             return $this->jsonResponse($response, 'error', 'Event not found', 404);
         }
 

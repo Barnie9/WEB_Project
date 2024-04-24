@@ -9,7 +9,7 @@ use Slim\Http\Response;
 /**
  * @OA\Get(
  *     path="/users",
- *     tags={"users"},
+ *     tags={"Users"},
  *     summary="Retrieve one user by email or all users",
  *     description="Returns a single user if email is provided or all users if no email is provided.",
  *     @OA\Parameter(

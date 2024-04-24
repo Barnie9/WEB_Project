@@ -50,6 +50,7 @@ namespace App\Entity;
  *     @OA\Property(
  *         property="type",
  *         type="string",
+ *         enum={"course", "seminary", "laboratory"},
  *         description="Type of the event"
  *     )
  * )

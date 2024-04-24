@@ -8,7 +8,7 @@ use Slim\Http\Response;
 /**
  * @OA\Get(
  *     path="/matters/{id}",
- *     tags={"matters"},
+ *     tags={"Matters"},
  *     summary="Retrieve a matter by ID",
  *     description="Retrieves a matter by its ID.",
  *     @OA\Parameter(

@@ -9,7 +9,7 @@ use Slim\Http\Response;
 /**
  * @OA\Delete(
  *     path="/events/{id}",
- *     tags={"Event"},
+ *     tags={"Events"},
  *     summary="Delete an event by ID",
  *     description="Deletes an event by its ID.",
  *     @OA\Parameter(

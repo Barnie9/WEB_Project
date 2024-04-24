@@ -23,6 +23,7 @@ namespace App\Entity;
  *     @OA\Property(
  *         property="type",
  *         type="string",
+ *         enum={"mandatory", "optional", "elective"},
  *         description="Type of the matter"
  *     )
  * )

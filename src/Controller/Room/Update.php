@@ -9,7 +9,7 @@ use Slim\Http\Response;
 /**
  * @OA\Put(
  *     path="/rooms/{id}",
- *     tags={"rooms"},
+ *     tags={"Rooms"},
  *     summary="Update a room by ID",
  *     description="Updates a room by its ID.",
  *     @OA\Parameter(

@@ -10,7 +10,7 @@ use Slim\Http\Response;
 /**
  * @OA\Put(
  *     path="/matters/{id}",
- *     tags={"matters"},
+ *     tags={"Matters"},
  *     summary="Update a matter by ID",
  *     description="Updates a matter by its ID.",
  *     @OA\Parameter(

@@ -8,7 +8,7 @@ use Slim\Http\Response;
 /**
  * @OA\Post(
  *     path="/users",
- *     tags={"User"},
+ *     tags={"Users"},
  *     summary="Create a new user",
  *     description="Creates a new user.",
  *     @OA\RequestBody(

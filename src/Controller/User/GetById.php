@@ -9,7 +9,7 @@ use Slim\Http\Response;
 /**
  * @OA\Get(
  *     path="/users/{id}",
- *     tags={"User"},
+ *     tags={"Users"},
  *     summary="Get a user by ID",
  *     description="Retrieves a user by its ID.",
  *     @OA\Parameter(

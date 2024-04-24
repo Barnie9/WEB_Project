@@ -8,7 +8,7 @@ use Slim\Http\Response;
 /**
  * @OA\Post(
  *     path="/events",
- *     tags={"Event"},
+ *     tags={"Events"},
  *     summary="Create a new event",
  *     description="Creates a new event.",
  *     @OA\RequestBody(

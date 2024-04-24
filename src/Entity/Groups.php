@@ -5,9 +5,9 @@ namespace App\Entity;
 
 /**
  * @OA\Schema(
- *     schema="Groups",
+ *     schema="Group",
  *     type="object",
- *     title="Groups",
+ *     title="Group",
  *     description="Groups entity schema",
  *     required={"id", "programme", "number", "type"},
  *     @OA\Property(
@@ -29,6 +29,7 @@ namespace App\Entity;
  *     @OA\Property(
  *         property="type",
  *         type="string",
+ *         enum={"year", "group", "subgroup"},
  *         description="Type of the group"
  *     )
  * )

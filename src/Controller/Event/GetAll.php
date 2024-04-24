@@ -10,7 +10,7 @@ use Slim\Http\Response;
 /**
  * @OA\Get(
  *     path="/events",
- *     tags={"Event"},
+ *     tags={"Events"},
  *     summary="List all events",
  *     description="Retrieves a list of all events.",
  *     @OA\Response(

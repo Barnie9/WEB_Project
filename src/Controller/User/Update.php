@@ -8,7 +8,7 @@ use Slim\Http\Response;
 /**
  * @OA\Put(
  *     path="/users/{id}",
- *     tags={"User"},
+ *     tags={"Users"},
  *     summary="Update a user by ID",
  *     description="Updates a user by its ID. Only certain fields can be updated.",
  *     @OA\Parameter(

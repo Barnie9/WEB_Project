@@ -1,0 +1,990 @@
+openapi: 3.0.0
+info:
+  title: 'Calendar App'
+  description: 'This API is designed to facilitate the management of a comprehensive calendar application, encompassing a broad range of functionalities including user management, event scheduling, course allocation, group coordination, department organization, and timetable structuring. It aims to provide an integrated platform for educational institutions to efficiently organize and access academic and administrative information.'
+  version: 1.0.3
+servers:
+  -
+    url: 'http://localhost/web_project/src/'
+paths:
+  /events:
+    get:
+      tags:
+        - Events
+      summary: 'List all events'
+      description: 'Retrieves a list of all events.'
+      operationId: f547118ef442f719f2211132e690853b
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+    post:
+      tags:
+        - Events
+      summary: 'Create a new event'
+      description: 'Creates a new event.'
+      operationId: 9528638b0e348f8c69d8cff7886553f6
+      requestBody:
+        description: 'Event data to create'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '201':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: success }
+                  data: { $ref: '#/components/schemas/Event' }
+                type: object
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Bad request' }
+                type: object
+  '/events/{id}':
+    get:
+      tags:
+        - Events
+      summary: 'Retrieve an event by ID'
+      description: 'Retrieves an event by its ID.'
+      operationId: 1fbd657c92defab0d86e26ca3d313cec
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the event to retrieve'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '404':
+          description: 'Event not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Event not found' }
+                type: object
+    put:
+      tags:
+        - Events
+      summary: 'Update an event by ID'
+      description: 'Updates an event by its ID.'
+      operationId: 6c636e315a7f5907c3f51cebe18f9021
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the event to update'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: 'Updated event data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '404':
+          description: 'Event not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Event not found' }
+                type: object
+    delete:
+      tags:
+        - Events
+      summary: 'Delete an event by ID'
+      description: 'Deletes an event by its ID.'
+      operationId: c6c527508ad10c073bb2a75e2ac5d588
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the event to delete'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: success }
+                  message: { type: string, example: 'Event deleted' }
+                type: object
+        '404':
+          description: 'Event not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Event not found' }
+                type: object
+  /groups:
+    get:
+      tags:
+        - Groups
+      summary: 'Retrieve all groups'
+      description: 'Retrieves all groups.'
+      operationId: 97709ce53b4fdbef4014497014251f63
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group'
+        '404':
+          description: 'Groups not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Groups not found' }
+                type: object
+    post:
+      tags:
+        - Groups
+      summary: 'Create a new group'
+      description: 'Creates a new group.'
+      operationId: 6954547b1e5a782749114c53542d560e
+      requestBody:
+        description: 'Group data to create'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        '201':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: success }
+                  data: { $ref: '#/components/schemas/Group' }
+                type: object
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Bad request' }
+                type: object
+  '/groups/{id}':
+    get:
+      tags:
+        - Groups
+      summary: 'Retrieve a group by ID'
+      description: 'Retrieves a group by its ID.'
+      operationId: 702b4e44766ab1e54d7644f3f1c4d4b4
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the group to retrieve'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '404':
+          description: 'Group not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Group not found' }
+                type: object
+    put:
+      tags:
+        - Groups
+      summary: 'Update a group by ID'
+      description: 'Updates a group by its ID.'
+      operationId: 6f4fa1d120406147b9ccc27ee074164a
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the group to update'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: 'Group data to update'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Invalid data' }
+                type: object
+        '404':
+          description: 'Group not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Group not found' }
+                type: object
+    delete:
+      tags:
+        - Groups
+      summary: 'Delete a group by ID'
+      description: 'Deletes a group by its ID.'
+      operationId: d3cfbea5f78b49dbebd4127b59194512
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the group to delete'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: success }
+                  message: { type: string, example: 'Group deleted' }
+                type: object
+        '404':
+          description: 'Group not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Group not found' }
+                type: object
+  /matters:
+    get:
+      tags:
+        - Matters
+      summary: 'List all matters or filter by matter ID'
+      operationId: 5b7ceecb6d703e997c459d650953f01e
+      parameters:
+        -
+          name: id
+          in: query
+          description: 'ID of the matter to retrieve'
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: 'A list of matters'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Matter'
+        '404':
+          description: 'A matter with the specified criteria was not found'
+    post:
+      tags:
+        - Matters
+      summary: 'Create a new matter'
+      description: 'Creates a new matter.'
+      operationId: 38eb8ba0ac98a75d21d81e3dc63127ac
+      requestBody:
+        description: 'Matter data to create'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Matter'
+      responses:
+        '201':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: success }
+                  data: { $ref: '#/components/schemas/Matter' }
+                type: object
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Bad request' }
+                type: object
+  '/matters/{id}':
+    get:
+      tags:
+        - Matters
+      summary: 'Retrieve a matter by ID'
+      description: 'Retrieves a matter by its ID.'
+      operationId: 4b2068ec501970b354ed2e76bc9fc590
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the matter to retrieve'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: success }
+                  data: { $ref: '#/components/schemas/Matter' }
+                type: object
+        '404':
+          description: 'Matter not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Matter not found' }
+                type: object
+    put:
+      tags:
+        - Matters
+      summary: 'Update a matter by ID'
+      description: 'Updates a matter by its ID.'
+      operationId: 8ba175f9346e8cbb5f29b4a006820277
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the matter to update'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: 'Matter data to update'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Matter'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: success }
+                  data: { $ref: '#/components/schemas/Matter' }
+                type: object
+        '404':
+          description: 'Matter not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Matter not found' }
+                type: object
+    delete:
+      tags:
+        - Matters
+      summary: 'Delete a matter by ID'
+      description: 'Deletes a matter by its ID.'
+      operationId: 229280eff53786fe29c33ae5889619b9
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the matter to delete'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: success }
+                  message: { type: string, example: 'Matter deleted' }
+                type: object
+        '404':
+          description: 'Matter not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Matter not found' }
+                type: object
+  /rooms:
+    get:
+      tags:
+        - Rooms
+      summary: 'Retrieve all rooms'
+      description: 'Returns all rooms available.'
+      operationId: 334929f8efcb91e002eec600e3eca265
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: success }
+                  data: { type: array, items: { $ref: '#/components/schemas/Room' } }
+                type: object
+        '404':
+          description: 'Rooms not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Rooms not found' }
+                type: object
+    post:
+      tags:
+        - Rooms
+      summary: 'Create a new room'
+      description: 'Creates a new room.'
+      operationId: 36ee35d0abd5df8d09ab46d1a5503dac
+      requestBody:
+        description: 'Room data to create'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+      responses:
+        '201':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: success }
+                  data: { $ref: '#/components/schemas/Room' }
+                type: object
+        '400':
+          description: 'Invalid data'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Invalid data' }
+                type: object
+  '/rooms/{id}':
+    get:
+      tags:
+        - Rooms
+      summary: 'Retrieve a room by ID'
+      description: 'Returns a room by its ID.'
+      operationId: 83eb275e6131386dd7c2d4469aa36995
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the room to retrieve'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: success }
+                  data: { $ref: '#/components/schemas/Room' }
+                type: object
+        '404':
+          description: 'Room not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Room not found' }
+                type: object
+    put:
+      tags:
+        - Rooms
+      summary: 'Update a room by ID'
+      description: 'Updates a room by its ID.'
+      operationId: 3f748f6805163d8c74fc1a729a139d52
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the room to update'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: 'Room data to update'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: success }
+                  data: { $ref: '#/components/schemas/Room' }
+                type: object
+        '400':
+          description: 'Invalid data'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Invalid data' }
+                type: object
+        '404':
+          description: 'Room not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Room not found' }
+                type: object
+    delete:
+      tags:
+        - Rooms
+      summary: 'Delete a room by ID'
+      description: 'Deletes a room by its ID.'
+      operationId: a4af362aa530b602b815d92f75897871
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the room to delete'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: 'Room deleted successfully'
+        '404':
+          description: 'Room not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Room not found' }
+                type: object
+  /users:
+    get:
+      tags:
+        - Users
+      summary: 'Retrieve one user by email or all users'
+      description: 'Returns a single user if email is provided or all users if no email is provided.'
+      operationId: 0940fc3675fe6a0a70eceb8334255fbf
+      parameters:
+        -
+          name: email
+          in: query
+          description: 'The email of the user to retrieve'
+          required: false
+          schema:
+            type: string
+            format: email
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - { description: 'List of all users', type: array, items: { $ref: '#/components/schemas/User' } }
+                  - { $ref: '#/components/schemas/User' }
+        '404':
+          description: 'User not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  code: { type: integer, example: '404' }
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'User not found' }
+                type: object
+        '500':
+          description: 'Internal Server Error'
+    post:
+      tags:
+        - Users
+      summary: 'Create a new user'
+      description: 'Creates a new user.'
+      operationId: 350e1f8d85209c87247345e2e1491a7c
+      requestBody:
+        description: 'User data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: 'User created successfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Bad request' }
+                type: object
+  '/users/{id}':
+    get:
+      tags:
+        - Users
+      summary: 'Get a user by ID'
+      description: 'Retrieves a user by its ID.'
+      operationId: c551a1ac1be37485844fea99fd5c4ec5
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the user to retrieve'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: 'User not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'User not found' }
+                type: object
+    put:
+      tags:
+        - Users
+      summary: 'Update a user by ID'
+      description: 'Updates a user by its ID. Only certain fields can be updated.'
+      operationId: 4e73057119289c1852c31b99ead70192
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the user to update'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: 'User object that needs to be updated'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: 'User updated successfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'Bad request' }
+                type: object
+        '404':
+          description: 'User not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'User not found' }
+                type: object
+    delete:
+      tags:
+        - Users
+      summary: 'Delete a user by ID'
+      description: 'Deletes a user by its ID.'
+      operationId: 2e3cbd202fb5b06e4e385ea633ba7f06
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of the user to delete'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: 'User deleted successfully'
+        '404':
+          description: 'User not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'User not found' }
+                type: object
+components:
+  schemas:
+    Event:
+      title: Event
+      description: 'Event entity schema'
+      required:
+        - id
+        - matterId
+        - teacherId
+        - groupId
+        - roomId
+        - startTime
+        - endTime
+        - type
+      properties:
+        id:
+          description: 'Unique identifier for the event'
+          type: integer
+          format: int64
+        matterId:
+          description: 'Identifier for the matter associated with the event'
+          type: integer
+        teacherId:
+          description: 'Identifier for the teacher associated with the event'
+          type: integer
+        groupId:
+          description: 'Identifier for the group associated with the event'
+          type: integer
+        roomId:
+          description: 'Identifier for the room associated with the event'
+          type: integer
+        startTime:
+          description: 'Start time of the event (in ISO 8601 format)'
+          type: string
+          format: date-time
+        endTime:
+          description: 'End time of the event (in ISO 8601 format)'
+          type: string
+          format: date-time
+        type:
+          description: 'Type of the event'
+          type: string
+          enum:
+            - course
+            - seminary
+            - laboratory
+      type: object
+    Group:
+      title: Group
+      description: 'Groups entity schema'
+      required:
+        - id
+        - programme
+        - number
+        - type
+      properties:
+        id:
+          description: 'Unique identifier for the group'
+          type: integer
+          format: int64
+        programme:
+          description: 'Programme of the group'
+          type: string
+        number:
+          description: 'Number of the group'
+          type: string
+        type:
+          description: 'Type of the group'
+          type: string
+          enum:
+            - year
+            - group
+            - subgroup
+      type: object
+    Matter:
+      title: Matter
+      description: 'Matter entity schema'
+      required:
+        - id
+        - title
+        - type
+      properties:
+        id:
+          description: 'Unique identifier for the matter'
+          type: integer
+          format: int64
+        title:
+          description: 'Title of the matter'
+          type: string
+        type:
+          description: 'Type of the matter'
+          type: string
+          enum:
+            - mandatory
+            - optional
+            - elective
+      type: object
+    Room:
+      title: Room
+      description: 'Room entity schema'
+      required:
+        - id
+        - name
+      properties:
+        id:
+          description: 'Unique identifier for the room'
+          type: integer
+          format: int64
+        name:
+          description: 'Name of the room'
+          type: string
+      type: object
+    User:
+      title: User
+      description: 'User entity schema'
+      required:
+        - id
+        - email
+        - firstName
+        - lastName
+        - type
+      properties:
+        id:
+          description: 'Unique identifier for the user'
+          type: integer
+          format: int64
+        email:
+          description: 'User email address'
+          type: string
+          format: email
+        firstName:
+          description: "User's first name"
+          type: string
+        lastName:
+          description: "User's last name"
+          type: string
+        type:
+          description: 'The type of user'
+          type: string
+          enum:
+            - student
+            - teacher
+            - admin
+        password:
+          description: 'User password, not generally returned in responses for security reasons'
+          type: string
+          writeOnly: true
+          example: examplePassword123!
+      type: object

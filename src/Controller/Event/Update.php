@@ -9,7 +9,7 @@ use Slim\Http\Response;
 /**
  * @OA\Put(
  *     path="/events/{id}",
- *     tags={"Event"},
+ *     tags={"Events"},
  *     summary="Update an event by ID",
  *     description="Updates an event by its ID.",
  *     @OA\Parameter(

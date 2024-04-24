@@ -8,7 +8,7 @@ use Slim\Http\Response;
 /**
  * @OA\Delete(
  *     path="/matters/{id}",
- *     tags={"matters"},
+ *     tags={"Matters"},
  *     summary="Delete a matter by ID",
  *     description="Deletes a matter by its ID.",
  *     @OA\Parameter(

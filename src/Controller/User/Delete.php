@@ -9,7 +9,7 @@ use Slim\Http\Response;
 /**
  * @OA\Delete(
  *     path="/users/{id}",
- *     tags={"User"},
+ *     tags={"Users"},
  *     summary="Delete a user by ID",
  *     description="Deletes a user by its ID.",
  *     @OA\Parameter(

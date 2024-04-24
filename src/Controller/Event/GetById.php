@@ -9,7 +9,7 @@ use Slim\Http\Response;
 /**
  * @OA\Get(
  *     path="/events/{id}",
- *     tags={"Event"},
+ *     tags={"Events"},
  *     summary="Retrieve an event by ID",
  *     description="Retrieves an event by its ID.",
  *     @OA\Parameter(

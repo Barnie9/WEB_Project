@@ -9,7 +9,7 @@ use Slim\Http\Response;
 /**
  * @OA\Post(
  *     path="/matters",
- *     tags={"matters"},
+ *     tags={"Matters"},
  *     summary="Create a new matter",
  *     description="Creates a new matter.",
  *     @OA\RequestBody(

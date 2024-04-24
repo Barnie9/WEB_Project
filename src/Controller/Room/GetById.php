@@ -9,7 +9,7 @@ use Slim\Http\Response;
 /**
  * @OA\Get(
  *     path="/rooms/{id}",
- *     tags={"rooms"},
+ *     tags={"Rooms"},
  *     summary="Retrieve a room by ID",
  *     description="Returns a room by its ID.",
  *     @OA\Parameter(

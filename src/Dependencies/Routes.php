@@ -2,11 +2,14 @@
 
 use App\Controller\User;
 use App\Controller\Groups;
-use App\Controller\Room;use App\Controller\Matter;
+use App\Controller\Room;
+use App\Controller\Matter;
 use App\Controller\Event;
 
 return static function($app)
 {
+    $app->post('/login', User\Login::class);
+
     $app->group('/users', function () use ($app): void {
         $app->get('', User\GetAll::class);
         $app->get('/{id}', User\GetById::class);

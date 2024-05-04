@@ -32,8 +32,6 @@ use Slim\Http\Response;
  *     )
  * )
  */
-
-
 final class Create extends BaseController
 {
     public function __invoke(Request $request, Response $response): Response

@@ -32,19 +32,22 @@ final class UserRepository extends BaseRepository
         $statement = $this->db->prepare($query);
         $statement->execute(['email' => $email]);
         $user = $statement->fetchObject(User::class);
+        if (!$user) {
+            return null;
+        }
         return $user;
     }
 
     public function createUser($user): User
     {
-        $query = 'INSERT INTO users VALUES (:id, :email, :password, :firstName, :lastName, :type)';
+        $query = 'INSERT INTO users VALUES (:id, :email, :password, :first_name, :last_name, :type)';
         $statement = $this->db->prepare($query);
         $statement->execute([
             'id' => null,
             'email' => $user['email'],
             'password' => $user['password'],
-            'firstName' => $user['firstName'],
-            'lastName' => $user['lastName'],
+            'first_name' => $user['firstName'],
+            'last_name' => $user['lastName'],
             'type' => $user['type']
         ]);
         return $this->getUserById($this->db->lastInsertId());
@@ -52,13 +55,13 @@ final class UserRepository extends BaseRepository
 
     public function updateUser($user): User
     {
-        $query = 'UPDATE users SET password = :password, firstName = :firstName, lastName = :lastName, type = :type WHERE id = :id';
+        $query = 'UPDATE users SET password = :password, first_name = :first_name, last_name = :last_name, type = :type WHERE id = :id';
         $statement = $this->db->prepare($query);
         $statement->execute([
             'id' => $user['id'],
             'password' => $user['password'],
-            'firstName' => $user['firstName'],
-            'lastName' => $user['lastName'],
+            'first_name' => $user['firstName'],
+            'last_name' => $user['lastName'],
             'type' => $user['type']
         ]);
         return $this->getUserById($user['id']);

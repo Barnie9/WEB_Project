@@ -51,8 +51,8 @@ final class User
     private $id;
     private $email;
     private $password;
-    private $firstName;
-    private $lastName;
+    private $first_name;
+    private $last_name;
     private $type;
 
     public function getId(): ?int
@@ -77,12 +77,12 @@ final class User
 
     public function getFirstName(): string
     {
-        return $this->firstName;
+        return $this->first_name;
     }
 
     public function getLastName(): string
     {
-        return $this->lastName;
+        return $this->last_name;
     }
 
     public function getType(): string
@@ -95,8 +95,8 @@ final class User
         return json_decode(json_encode([
             'id' => $this->id,
             'email' => $this->email,
-            'firstName' => $this->firstName,
-            'lastName' => $this->lastName,
+            'firstName' => $this->first_name,
+            'lastName' => $this->last_name,
             'type' => $this->type,
         ]));
     }

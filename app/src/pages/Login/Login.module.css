@@ -1,0 +1,55 @@
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    border-radius: 20px;
+    box-shadow: 0 0 20px gray;
+}
+
+.title {
+    font-size: 30px;
+    margin: 40px;
+    font-weight: bold;
+}
+
+.input {
+    height: 40px;
+    width: 60%;
+    border: none;
+    border-bottom: 1px solid gray;
+    font-size: 20px;
+    margin: 10px;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40%;
+    border: none;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 24px;
+    margin: 50px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+}

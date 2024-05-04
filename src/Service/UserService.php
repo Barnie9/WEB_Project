@@ -7,6 +7,25 @@ use App\Service\BaseService;
 
 final class UserService extends BaseService
 {
+    public function login($email, $password): ?User
+    {
+        $user = $this->getUserRepository()->getUserByEmail($email);
+
+        if ($user === null) {
+            return null;
+        }
+
+        // if (!password_verify($password, $user->getPassword())) {
+        //     return null;
+        // }
+
+        if ($password !== $user->getPassword()) {
+            return null;
+        }
+
+        return $user;
+    }
+
     public function getAllUsers(): array
     {
         return $this->getUserRepository()->getAllUsers();

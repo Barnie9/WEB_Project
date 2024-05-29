@@ -13,7 +13,13 @@ export interface User {
 	id: number;
 	email: string;
 	password: string;
-	first_name: string;
-	last_name: string;
+	firstName: string;
+	lastName: string;
+	type: string;
+}
+
+export interface Matter {
+	id: number;
+	title: string;
 	type: string;
 }

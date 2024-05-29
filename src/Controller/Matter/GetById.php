@@ -3,6 +3,7 @@
 namespace App\Controller\Matter;
 
 use App\Controller\BaseController;
+use App\Entity\Matter;
 use Slim\Http\Request;
 use Slim\Http\Response;
 /**
@@ -48,13 +49,16 @@ use Slim\Http\Response;
  *     )
  * )
  */
-
-
 final class GetById extends BaseController
 {
     public function __invoke(Request $request, Response $response): Response
     {
         $id = $request->getAttribute('id');
+
+        if ($id === 0) {
+            $matter = new Matter();
+            return $this->jsonResponse($response, 'success', $matter->toJson(), 200);
+        }
 
         $matter = $this->getMatterService()->getMatterById($id);
 

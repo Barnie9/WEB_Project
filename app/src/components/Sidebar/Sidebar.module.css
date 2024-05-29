@@ -1,0 +1,65 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #24344b;
+}
+
+.userDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 150px;
+    width: 100%;
+    margin-top: 5%;
+}
+
+.userIcon {
+    height: auto;
+    width: 80px;
+}
+
+.username {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.email {
+    color: gray;
+    font-size: 16px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.menuItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    color: white;
+    font-size: 18px;
+    background-color: #2b3c58;
+}
+
+.menuItem:hover {
+    background-color: #3b4f6a;
+    cursor: pointer;
+}
+
+.menuItemIcon {
+    margin-left: 10px;
+    margin-right: 10px;
+}

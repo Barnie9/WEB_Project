@@ -39,20 +39,8 @@ final class GetAll extends BaseController
 {
     public function __invoke(Request $request, Response $response): Response
     {
-        $queryParams = $request->getQueryParams();
+        $matters = $this->getMatterService()->getAllMatters();
 
-        $id = $queryParams['id'] ?? null;
-
-        if (isset($id)) {
-            $matter = $this->getMatterService()->getMatterById($id);
-
-            if ($matter->getId() === null) {
-                return $this->jsonResponse($response, 'error', 'Matter not found', 404);
-            }
-
-            return $this->jsonResponse($response, 'success', $matter->toJson(), 200);
-        }
-        $matter = $this->getMatterService()->getAllMatters();
-        return $this->jsonResponse($response, 'success', $matter, 200);
+        return $this->jsonResponse($response, 'success', $matters, 200);
     }
 }

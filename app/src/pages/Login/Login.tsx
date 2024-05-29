@@ -33,7 +33,7 @@ const Login = () => {
 		} else if (data) {
 			dispatch(clearLoginState());
 			dispatch(setUser(data.message));
-            navigate("/login");
+            navigate("/");
 		}
 	}, [isLoading]);
 

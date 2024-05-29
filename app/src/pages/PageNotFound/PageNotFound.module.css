@@ -1,0 +1,19 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.title {
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+}
+
+.subtitle {
+    font-size: 24px;
+    color: #333;
+}

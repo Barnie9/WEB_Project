@@ -36,15 +36,22 @@ const Sidebar = () => {
 					<Article className={SidebarCSS.menuItemIcon} />
 					Matters
 				</div>
-				<div className={SidebarCSS.menuItem}>
+				<div className={SidebarCSS.menuItem} onClick={() =>{
+					navigate("/rooms")
+				
+				}}>
 					<MeetingRoom className={SidebarCSS.menuItemIcon} />
 					Rooms
 				</div>
-                <div className={SidebarCSS.menuItem}>
+                <div className={SidebarCSS.menuItem} onClick={() =>{
+					navigate("/groups")
+				}}>
 					<Groups className={SidebarCSS.menuItemIcon} />
 					Groups
 				</div>
-                <div className={SidebarCSS.menuItem}>
+                <div className={SidebarCSS.menuItem} onClick={() =>
+					navigate("/users")
+				}>
 					<Person className={SidebarCSS.menuItemIcon} />
 					Users
 				</div>

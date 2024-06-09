@@ -55,10 +55,31 @@ final class GroupsRepository extends BaseRepository
 
     public function deleteGroup(int $id): bool
     {
-        $stmt = $this->db->prepare('DELETE FROM groups WHERE id = :id');
-        $stmt->execute(['id' => $id]);
-
-        return $stmt->rowCount() > 0;
+        try {
+            // Begin transaction
+            $this->db->beginTransaction();
+    
+            // Delete memberships related to the group
+            $query = 'DELETE FROM memberships WHERE group_id = :id';
+            $statement = $this->db->prepare($query);
+            $statement->execute(['id' => $id]);
+    
+            // Delete the group
+            $query = 'DELETE FROM groups WHERE id = :id';
+            $statement = $this->db->prepare($query);
+            $statement->execute(['id' => $id]);
+    
+            // Commit transaction
+            $this->db->commit();
+    
+            return $statement->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Rollback transaction in case of an error
+            if ($this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
+            throw $e; // Rethrow the exception to be handled elsewhere
+        }
     }
 
 

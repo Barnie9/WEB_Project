@@ -51,6 +51,6 @@ final class GetById extends BaseController
             return $this->jsonResponse($response, 'error', 'Event not found', 404);
         }
 
-        return $this->jsonResponse($response, 'success', $event->toJson(), 200);
+        return $this->jsonResponse($response, 'success', $event, 200);
     }
 }

@@ -28,22 +28,24 @@ final class EventService extends BaseService
             return new Event();
         }
 
-        $existingEvent = $this->getEventRepository()->getExistingEventById($event['id']);
+        $existingEvent = $this->getEventRepository()->getEventById($event['id']);
 
         if ($existingEvent === null) {
             return null;
         }
 
-        $event['matterId'] = isset($event['matterId']) ? $event['matterId'] : $existingEvent->getMatterId();
-        $event['teacherId'] = isset($event['teacherId']) ? $event['teacherId'] : $existingEvent->getTeacherId();
-        $event['groupId'] = isset($event['groupId']) ? $event['groupId'] : $existingEvent->getGroupId();
-        $event['roomId'] = isset($event['roomId']) ? $event['roomId'] :
-        $existingEvent->getroomId();
-        $event['startDate'] = isset($event['startDate']) ? $event['startDate'] : $existingEvent->getStartDate();
-        $event['startTime'] = isset($event['startTime']) ? $event['startTime'] : $existingEvent->getStartTime();
-        $event['endTime'] = isset($event['endTime']) ? $event['endTime'] : $existingEvent->getEndTime();
-        $event['type'] = isset($event['type']) ? $event['type'] : $existingEvent->getType();
+   // Convert incoming snake_case keys to camelCase
+   $event['matterId'] = isset($event['matter_id']) ? $event['matter_id'] : $existingEvent->getMatterId();
+   $event['teacherId'] = isset($event['teacher_id']) ? $event['teacher_id'] : $existingEvent->getTeacherId();
+   $event['groupId'] = isset($event['group_id']) ? $event['group_id'] : $existingEvent->getGroupId();
+   $event['roomId'] = isset($event['room_id']) ? $event['room_id'] : $existingEvent->getRoomId();
+   $event['startDate'] = isset($event['start_time']) ? $event['start_time'] : $existingEvent->getStartDate();
+   $event['startTime'] = isset($event['start_time']) ? $event['start_time'] : $existingEvent->getStartTime();
+   $event['endTime'] = isset($event['end_time']) ? $event['end_time'] : $existingEvent->getEndTime();
+   $event['type'] = isset($event['type']) ? $event['type'] : $existingEvent->getType();
 
+   // Remove snake_case keys
+   unset($event['matter_id'], $event['teacher_id'], $event['group_id'], $event['room_id'], $event['start_time'], $event['end_time']);
         return $this->getEventRepository()->updateEvent($event);
     }
 

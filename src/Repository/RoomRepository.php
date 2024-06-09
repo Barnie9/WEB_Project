@@ -53,9 +53,25 @@ class RoomRepository extends BaseRepository
 
     public function deleteRoom(int $id): bool
     {
-        $stmt = $this->db->prepare('DELETE FROM rooms WHERE id = :id');
-        $stmt->execute(['id' => $id]);
-        return true;
+        $this->db->beginTransaction();
+
+        try {
+            // Disable foreign key checks
+            $this->db->exec('SET FOREIGN_KEY_CHECKS=0');
+
+            // Delete the room
+            $stmt = $this->db->prepare('DELETE FROM rooms WHERE id = :id');
+            $stmt->execute(['id' => $id]);
+
+            // Re-enable foreign key checks
+            $this->db->exec('SET FOREIGN_KEY_CHECKS=1');
+
+            $this->db->commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->db->rollBack();
+            throw $e;
+        }
     }
-   
+ 
 }

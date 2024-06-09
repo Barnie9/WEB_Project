@@ -28,7 +28,7 @@ final class EventRepository extends BaseRepository
 
     public function createEvent($event): Event
     {
-        $query = 'INSERT INTO events VALUES (:id, :matterId, :teacherId, :groupId, :roomId, :startDate, :startTime, :endTime, :type)';
+        $query = 'INSERT INTO events VALUES (:id, :matterId, :teacherId, :groupId, :roomId,  :startTime, :endTime, :type)';
         $statement = $this->db->prepare($query);
         $statement->execute([
             'id' => null,
@@ -36,7 +36,6 @@ final class EventRepository extends BaseRepository
             'teacherId' => $event['teacherId'],
             'groupId' => $event['groupId'],
             'roomId' => $event['roomId'],
-            'startDate' => $event['startDate'],
             'startTime' => $event['startTime'],
             'endTime' => $event['endTime'],
             'type' => $event['type']
@@ -46,7 +45,8 @@ final class EventRepository extends BaseRepository
 
     public function updateEvent($event): Event
     {
-        $query = 'UPDATE events SET matterId = :matterId, teacherId = :teacherId, groupId = :groupId, roomId = :roomId, startDate = :startDate, startTime = :startTime, endTime = :endTime, type = :type WHERE id = :id';
+
+        $query = 'UPDATE events SET matter_id = :matterId, teacher_id = :teacherId, group_id = :groupId, room_id = :roomId,  start_time = :startTime, end_time = :endTime, type = :type WHERE id = :id';
         $statement = $this->db->prepare($query);
         $statement->execute([
             'id' => $event['id'],
@@ -54,7 +54,6 @@ final class EventRepository extends BaseRepository
             'teacherId' => $event['teacherId'],
             'groupId' => $event['groupId'],
             'roomId' => $event['roomId'],
-            'startDate' => $event['startDate'],
             'startTime' => $event['startTime'],
             'endTime' => $event['endTime'],
             'type' => $event['type']

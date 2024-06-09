@@ -69,10 +69,38 @@ final class UserRepository extends BaseRepository
 
     public function deleteUser(int $id): bool
     {
-        $query = 'DELETE FROM users WHERE id = :id';
-        $statement = $this->db->prepare($query);
-        $statement->execute(['id' => $id]);
-        $user = $this->getUserById($id);
-        return $user->getId() === null;
+        try {
+            // Begin transaction
+            $this->db->beginTransaction();
+    
+            // Delete memberships related to the user
+            $query = 'DELETE FROM memberships WHERE user_id = :id';
+            $statement = $this->db->prepare($query);
+            $statement->execute(['id' => $id]);
+    
+            // Delete events related to the user (as teacher)
+            $query = 'DELETE FROM events WHERE teacher_id = :id';
+            $statement = $this->db->prepare($query);
+            $statement->execute(['id' => $id]);
+    
+            // Delete the user
+            $query = 'DELETE FROM users WHERE id = :id';
+            $statement = $this->db->prepare($query);
+            $statement->execute(['id' => $id]);
+    
+            // Commit transaction
+            $this->db->commit();
+    
+            // Check if the user is really deleted
+            $user = $this->getUserById($id);
+            return $user->getId() === null;
+        } catch (PDOException $e) {
+            // Rollback transaction in case of an error
+            if ($this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
+            throw $e; // Rethrow the exception to be handled elsewhere
+        }
+    
     }
 }

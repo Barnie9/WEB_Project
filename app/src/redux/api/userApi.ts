@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IResponse, User } from "../interfaces/interfaces";
 
-export const usersApi = createApi({
-    reducerPath: "usersApi",
+export const userApi = createApi({
+    reducerPath: "userApi",
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost/web_project/src/" }),
     tagTypes: ["User", "Users"],
     endpoints: (builder) => ({
@@ -46,4 +46,4 @@ export const {
     useAddUserMutation,
     useUpdateUserMutation,
     useDeleteUserMutation,
-} = usersApi;
+} = userApi;

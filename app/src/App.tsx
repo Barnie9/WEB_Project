@@ -9,8 +9,10 @@ import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Rooms from "./pages/Rooms/Rooms";
 import RoomDetails from "./pages/RoomDetails/RoomDetails";
 import Groups from "./pages/Groups/Groups";
-import GroupDetails from "./pages/GroupsDetails/GroupsDetails";
+import GroupDetails from "./pages/GroupDetails/GroupDetails";
 import Users from "./pages/Users/Users";
+
+import { Layout as UserLayout } from "./pages/Layout";
 
 const DefaultRoutes = () => {
 	return (
@@ -43,6 +45,17 @@ const AdminRoutes = () => {
 	);
 };
 
+const StudentAndTeacherRoutes = () => {
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<UserLayout />} />
+				<Route path="*" element={<PageNotFound />} />
+			</Routes>
+		</BrowserRouter>
+	);
+}
+
 const App = () => {
 	const user = useAppSelector(selectUser);
 
@@ -51,6 +64,9 @@ const App = () => {
 	}
 	if (user.type === "admin") {
 		return <AdminRoutes />;
+	}
+	if (user.type === "student" || user.type === "teacher") {
+		return <StudentAndTeacherRoutes />;
 	}
 };
 

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { User } from "../../redux/interfaces/interfaces";
-import UserCardCSS from "./UsersCard.module.css";
+import UserCardCSS from "./UserCard.module.css";
 
 const UserCard = (props: { user: User }) => {
     const navigate = useNavigate();

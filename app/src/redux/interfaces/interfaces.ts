@@ -23,10 +23,9 @@ export interface Matter {
 	title: string;
 	type: string;
 }
-export interface Rooms {
+export interface Room {
 	id: number;
 	name: string;
-
 }
 export interface Group {
 	id: number;
@@ -34,13 +33,3 @@ export interface Group {
 	number: number;
 	type: string;
 }
-
-export interface Users{
-    id: number;
-    email: string;
-    password: string;
-    first_name: string;
-    last_name: string;
-    type: string;
-
-}    

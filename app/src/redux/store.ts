@@ -3,30 +3,30 @@ import userSlice from "./slices/userSlice";
 import loginSlice from "./slices/loginSlice";
 import { loginApi } from "./api/loginApi";
 import { matterApi } from "./api/matterApi";
-import { roomApi } from "./api/roomsApi";
-import { groupsApi } from "./api/groupsApi";
-import { usersApi } from "./api/usersApi";
-
+import { roomApi } from "./api/roomApi";
+import { groupApi } from "./api/groupApi";
+import { userApi } from "./api/userApi";
+import dateSlice from "./slices/dateSlice";
 
 export const store = configureStore({
-    reducer: {
-        loginReducer: loginSlice,
-        userReducer: userSlice,
-        [loginApi.reducerPath]: loginApi.reducer,
-        [matterApi.reducerPath]: matterApi.reducer,
-        [roomApi.reducerPath]: roomApi.reducer,
-        [groupsApi.reducerPath]: groupsApi.reducer,
-        [usersApi.reducerPath]: usersApi.reducer,
-    },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(
-            loginApi.middleware,
-            matterApi.middleware,
-            roomApi.middleware,
-            groupsApi.middleware,
-            usersApi.middleware
-
-        ),
+	reducer: {
+		loginReducer: loginSlice,
+		userReducer: userSlice,
+		dateSlice: dateSlice,
+		[loginApi.reducerPath]: loginApi.reducer,
+		[matterApi.reducerPath]: matterApi.reducer,
+		[roomApi.reducerPath]: roomApi.reducer,
+		[groupApi.reducerPath]: groupApi.reducer,
+		[userApi.reducerPath]: userApi.reducer,
+	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware().concat(
+			loginApi.middleware,
+			matterApi.middleware,
+			roomApi.middleware,
+			groupApi.middleware,
+			userApi.middleware
+		),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

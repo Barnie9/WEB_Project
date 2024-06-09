@@ -1,20 +1,20 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Group } from '../interfaces/interfaces';
+import { Group, IResponse } from '../interfaces/interfaces';
 
-export const groupsApi = createApi({
-    reducerPath: 'groupsApi',
+export const groupApi = createApi({
+    reducerPath: 'groupApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost/web_project/src/' }),
     tagTypes: ['Group', 'Groups'],
     endpoints: (builder) => ({
-        getAllGroups: builder.query<Group[], void>({
+        getAllGroups: builder.query<IResponse, void>({
             query: () => 'groups',
             providesTags: ['Groups'],
         }),
-        getGroupById: builder.query<Group, number>({
+        getGroupById: builder.query<IResponse, number>({
             query: (id) => `groups/${id}`,
             providesTags: ['Group'],
         }),
-        addGroup: builder.mutation<Group, Partial<Group>>({
+        addGroup: builder.mutation<IResponse, Partial<Group>>({
             query: (body) => ({
                 url: 'groups',
                 method: 'POST',
@@ -22,7 +22,7 @@ export const groupsApi = createApi({
             }),
             invalidatesTags: ['Groups'],
         }),
-        updateGroup: builder.mutation<Group, Partial<Group>>({
+        updateGroup: builder.mutation<IResponse, Partial<Group>>({
             query: (body) => ({
                 url: `groups/${body.id}`,
                 method: 'PUT',
@@ -30,7 +30,7 @@ export const groupsApi = createApi({
             }),
             invalidatesTags: ['Group', 'Groups'],
         }),
-        deleteGroup: builder.mutation<{ success: boolean; id: number }, number>({
+        deleteGroup: builder.mutation<IResponse, number>({
             query: (id) => ({
                 url: `groups/${id}`,
                 method: 'DELETE',
@@ -46,4 +46,4 @@ export const {
     useAddGroupMutation,
     useUpdateGroupMutation,
     useDeleteGroupMutation,
-} = groupsApi;
+} = groupApi;

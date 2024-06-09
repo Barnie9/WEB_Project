@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IResponse, Rooms } from "../interfaces/interfaces";
+import { IResponse, Room } from "../interfaces/interfaces";
 
 export const roomApi = createApi({
-    reducerPath: "roomsApi",
+    reducerPath: "roomApi",
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost/web_project/src/" }),
     tagTypes: ["Room", "Rooms"],
     endpoints: (builder) => ({
@@ -14,7 +14,7 @@ export const roomApi = createApi({
             query: (id) => `rooms/${id}`,
             providesTags: ["Room"],
         }),
-        addRoom: builder.mutation<IResponse, Partial<Rooms>>({
+        addRoom: builder.mutation<IResponse, Partial<Room>>({
             query: (body) => ({
                 url: `rooms`,
                 method: "POST",
@@ -22,7 +22,7 @@ export const roomApi = createApi({
             }),
             invalidatesTags: ["Rooms"],
         }),
-        updateRoom: builder.mutation<IResponse, Rooms>({
+        updateRoom: builder.mutation<IResponse, Room>({
             query: (body) => ({
                 url: `rooms/${body.id}`,
                 method: "PUT",

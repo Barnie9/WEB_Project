@@ -12,8 +12,7 @@ const GroupCard = (props: { group: Group }) => {
             }}
         >
             <div className={GroupCardCSS.programme}>{props.group.programme}</div>
-            <div className={GroupCardCSS.number}>{props.group.number}</div>
-            <div className={GroupCardCSS.type}>{props.group.type}</div>
+            <div className={GroupCardCSS.type}>{props.group.type + " " + props.group.number}</div>
         </div>
     );
 };

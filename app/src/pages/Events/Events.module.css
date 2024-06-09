@@ -8,8 +8,8 @@
 
 .events {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 200px);
-    grid-template-rows: repeat(auto-fill, 120px);
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-template-rows: repeat(auto-fill, 200px);
     gap: 30px;
     justify-content: center;
     overflow-y: auto;

@@ -1,3 +1,4 @@
+import { useGetAllEventsQuery } from "../redux/api/eventApi";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrentSelectedDate } from "../redux/slices/dateSlice";
 import {
@@ -23,6 +24,8 @@ const WeekCalendar = () => {
 
 	// query ul de evenimente, dar cu filtre de data?
 	// const { data: calendarEntries, isSuccess: calendarEntriesIsSuccess } = useGetFilteredCalendarEntriesQuery();
+
+	const { data: events, isSuccess: eventsIsSuccess } = useGetAllEventsQuery();
 
 	return (
 		<div
@@ -66,11 +69,12 @@ const WeekCalendar = () => {
 				return <EmptyCell key={"empty-cell-" + index} cell={cell} />;
 			})} */}
 
-            {/* {calendarEntriesIsSuccess && calendarEntries.map((calendarEntry, index) => {
-                return <EventCard key={"event-card-" + index} calendarEntry={calendarEntry} />
-            })} */}
+            {eventsIsSuccess && events.message.map((event, index) => {
+                return <EventCard key={"event-card-" + index} event={event} />
+            })}
 		</div>
 	);
 };
 
 export default WeekCalendar;
+

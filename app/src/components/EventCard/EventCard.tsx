@@ -11,8 +11,8 @@ const EventCard = (props: { event: Event }) => {
                 navigate("/event/" + props.event.id);
             }}
         >
-            <div className={EventCardCSS.matterId}>Matter ID: {props.event.matter_id}</div>
             <div className={EventCardCSS.details}>
+                <div>Matter ID: {props.event.matter_id}</div>
                 <div>Teacher ID: {props.event.teacher_id}</div>
                 <div>Group ID: {props.event.group_id}</div>
                 <div>Room ID: {props.event.room_id}</div>

@@ -75,7 +75,7 @@ const Navbar = () => {
 				</IconButton>
 				<Button
 					text="TODAY"
-					textColor="--red-primary"
+					textColor="--blue-primary"
 					backgroundColor="--white"
 					hoverBackgroundColor="--light-gray"
 					onClick={() => dispatch(setCurrentSelectedDate(dayjs()))}

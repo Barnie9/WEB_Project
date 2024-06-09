@@ -35,7 +35,7 @@ const DayHeader = (props: Props) => {
 				style={{
 					fontSize: "1rem",
 					color: currentSelectedDate.isSame(props.date, "day")
-						? "var(--red-primary)"
+						? "var(--light-blue-primary)"
 						: "var(--gray)",
 				}}
 			>
@@ -51,12 +51,12 @@ const DayHeader = (props: Props) => {
 				}
 				backgroundColor={
 					currentSelectedDate.isSame(props.date, "day")
-						? "--red-primary"
+						? "--light-blue-primary"
 						: "--white"
 				}
 				hoverBackgroundColor={
 					currentSelectedDate.isSame(props.date, "day")
-						? "--red-secondary"
+						? "--light-blue-secondary"
 						: "--light-gray"
 				}
 				onClick={() => dispatch(setCurrentSelectedDate(props.date))}

@@ -36,12 +36,12 @@ const Sidebar = () => {
 					width: "100%",
 					"& .MuiPickersDay-root": {
 						"&.Mui-selected": {
-							backgroundColor: "var(--red-primary)",
+							backgroundColor: "var(--light-blue-primary)",
 							"&:hover": {
-								backgroundColor: "var(--red-secondary)",
+								backgroundColor: "var(--light-blue-secondary)",
 							},
 							"&:focus": {
-								backgroundColor: "var(--red-primary)",
+								backgroundColor: "var(--light-blue-primary)",
 							},
 						},
 					},

@@ -8,6 +8,7 @@ import {
 } from "../../redux/api/matterApi";
 import { IError, Matter } from "../../redux/interfaces/interfaces";
 import { useEffect, useState } from "react";
+import { useErrorEffect } from "../../customEffects";
 
 const MatterDetails = () => {
 	const params = useParams();
@@ -23,21 +24,23 @@ const MatterDetails = () => {
 		data: matterData,
 		isLoading: matterLoading,
 		isFetching: matterFetching,
-	} = useGetMatterByIdQuery(Number(params.id));
+	} = useGetMatterByIdQuery(Number(params.id), {
+		skip: params.id === "0",
+	});
 
 	const [
 		addMatter,
-		{ error: addMatterError, isLoading: addMatterIsLoading },
+		{ error: addMatterError, isSuccess: addMatterIsSuccess },
 	] = useAddMatterMutation();
 
 	const [
 		updateMatter,
-		{ error: updateMatterError, isLoading: updateMatterIsLoading },
+		{ error: updateMatterError, isSuccess: updateMatterIsSuccess },
 	] = useUpdateMatterMutation();
 
 	const [
 		deleteMatter,
-		{ error: deleteMatterError, isLoading: deleteMatterIsLoading },
+		{ error: deleteMatterError, isSuccess: deleteMatterIsSuccess},
 	] = useDeleteMatterMutation();
 
 	const setMatterTitle = (title: string) => {
@@ -54,20 +57,15 @@ const MatterDetails = () => {
 		}
 	}, [matterLoading, matterFetching]);
 
+	useErrorEffect(addMatterError);
+	useErrorEffect(updateMatterError);
+	useErrorEffect(deleteMatterError);
+
 	useEffect(() => {
-		if (addMatterError) {
-			const error = addMatterError as IError;
-			alert(error.data.message);
+		if (addMatterIsSuccess || updateMatterIsSuccess || deleteMatterIsSuccess) {
+			navigate("/matters");
 		}
-		if (updateMatterError) {
-			const error = updateMatterError as IError;
-			alert(error.data.message);
-		}
-		if (deleteMatterError) {
-			const error = deleteMatterError as IError;
-			alert(error.data.message);
-		}
-	}, [addMatterIsLoading, updateMatterIsLoading, deleteMatterIsLoading]);
+	}, [addMatterIsSuccess, updateMatterIsSuccess, deleteMatterIsSuccess]);
 
 	return (
 		<div className={MatterDetailsCSS.page}>
@@ -120,7 +118,7 @@ const MatterDetails = () => {
 							className={MatterDetailsCSS.button}
 							style={{ backgroundColor: "red" }}
 							onClick={() => {
-								deleteMatter(matter);
+								deleteMatter(matter.id);
 							}}
 						>
 							Delete

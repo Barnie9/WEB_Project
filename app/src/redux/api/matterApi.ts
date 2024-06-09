@@ -4,11 +4,11 @@ import { IResponse, Matter } from "../interfaces/interfaces";
 export const matterApi = createApi({
 	reducerPath: "matterApi",
 	baseQuery: fetchBaseQuery({ baseUrl: "http://localhost/web_project/src/" }),
-	tagTypes: ["Matter"],
+	tagTypes: ["Matter", "Matters"],
 	endpoints: (builder) => ({
 		getAllMatters: builder.query<IResponse, void>({
 			query: () => "matters",
-			providesTags: ["Matter"],
+			providesTags: ["Matters"],
 		}),
 		getMatterById: builder.query<IResponse, number>({
 			query: (id) => `matters/${id}`,
@@ -20,25 +20,22 @@ export const matterApi = createApi({
 				method: "POST",
 				body,
 			}),
-			invalidatesTags: ["Matter"],
+			invalidatesTags: ["Matters"],
 		}),
-		updateMatter: builder.mutation<
-			IResponse,
-			Partial<Matter> & Pick<Matter, "id">
-		>({
-			query: ({ id, ...body }) => ({
-				url: `matters/${id}`,
+		updateMatter: builder.mutation<IResponse, Matter>({
+			query: (body) => ({
+				url: `matters/${body.id}`,
 				method: "PUT",
 				body,
 			}),
-			invalidatesTags: ["Matter"],
+			invalidatesTags: ["Matter", "Matters"],
 		}),
-		deleteMatter: builder.mutation<IResponse, Pick<Matter, "id">>({
-			query: ({ id }) => ({
+		deleteMatter: builder.mutation<IResponse, number>({
+			query: (id) => ({
 				url: `matters/${id}`,
 				method: "DELETE",
 			}),
-			invalidatesTags: ["Matter"],
+			invalidatesTags: ["Matters"],
 		}),
 	}),
 });

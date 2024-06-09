@@ -24,8 +24,8 @@ const Matters = () => {
 		<div className={MattersCSS.page}>
 			<Header type="matter" />
 			<div className={MattersCSS.matters}>
-				{matters.map((matter) => (
-					<MatterCard matter={matter} />
+				{matters.map((matter, index) => (
+					<MatterCard key={"matter-" + index} matter={matter} />
 				))}
 			</div>
 		</div>

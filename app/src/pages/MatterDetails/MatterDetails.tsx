@@ -6,7 +6,7 @@ import {
 	useGetMatterByIdQuery,
 	useUpdateMatterMutation,
 } from "../../redux/api/matterApi";
-import { IError, Matter } from "../../redux/interfaces/interfaces";
+import { Matter } from "../../redux/interfaces/interfaces";
 import { useEffect, useState } from "react";
 import { useErrorEffect } from "../../customEffects";
 

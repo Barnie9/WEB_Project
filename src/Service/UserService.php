@@ -82,4 +82,9 @@ final class UserService extends BaseService
 
         return $this->getUserRepository()->deleteUser($id);
     }
+
+    public function getUserGroups(int $userId): array
+    {
+        return $this->getUserRepository()->getUserGroups($userId);
+    }
 }

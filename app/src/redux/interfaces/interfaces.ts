@@ -33,3 +33,13 @@ export interface Group {
 	number: number;
 	type: string;
 }
+export interface Event {
+    id: number;
+    matter_id: number;
+    teacher_id: number;
+    group_id: number;
+    room_id: number;
+    start_time: Date;
+    end_time: Date;
+    type: string;
+}

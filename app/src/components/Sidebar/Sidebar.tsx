@@ -55,7 +55,9 @@ const Sidebar = () => {
 					<Person className={SidebarCSS.menuItemIcon} />
 					Users
 				</div>
-                <div className={SidebarCSS.menuItem}>
+                <div className={SidebarCSS.menuItem} onClick={() =>
+					navigate("/events")
+				}>
 					<Event className={SidebarCSS.menuItemIcon} />
 					Events
 				</div>

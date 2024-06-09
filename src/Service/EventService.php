@@ -59,4 +59,8 @@ final class EventService extends BaseService
 
         return $this->getEventRepository()->deleteEvent($id);
     }
+    public function getFilteredEvents(array $groupIds, string $startDate, string $endDate): array
+    {
+        return $this->getEventRepository()->getFilteredEvents($groupIds, $startDate, $endDate);
+    }
 }

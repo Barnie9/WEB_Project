@@ -69,4 +69,22 @@ final class EventRepository extends BaseRepository
         $event = $this->getEventById($id);
         return $event->getId() === null;
     }
+    public function getFilteredEvents(array $groupIds, string $startDate, string $endDate): array
+    {
+        $inQuery = implode(',', $groupIds);
+        
+        $query = "
+            SELECT * 
+            FROM events 
+            WHERE group_id IN ($inQuery)
+            AND start_time >= ?
+            AND end_time <= ?
+        ";
+
+        $statement = $this->db->prepare($query);
+        $params = array_merge($groupIds, [$startDate, $endDate]);
+        $statement->execute($params);
+        
+        return $statement->fetchAll(PDO::FETCH_CLASS, Event::class);
+    }
 }

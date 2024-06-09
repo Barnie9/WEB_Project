@@ -7,6 +7,7 @@ import { roomApi } from "./api/roomApi";
 import { groupApi } from "./api/groupApi";
 import { userApi } from "./api/userApi";
 import dateSlice from "./slices/dateSlice";
+import { eventApi } from "./api/eventApi";
 
 export const store = configureStore({
 	reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
 		[roomApi.reducerPath]: roomApi.reducer,
 		[groupApi.reducerPath]: groupApi.reducer,
 		[userApi.reducerPath]: userApi.reducer,
+        [eventApi.reducerPath]: eventApi.reducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(
@@ -25,7 +27,8 @@ export const store = configureStore({
 			matterApi.middleware,
 			roomApi.middleware,
 			groupApi.middleware,
-			userApi.middleware
+			userApi.middleware,
+            eventApi.middleware,
 		),
 });
 

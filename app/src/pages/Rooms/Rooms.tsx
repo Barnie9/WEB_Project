@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useGetAllRoomsQuery } from "../../redux/api/roomApi";
-import { Rooms } from "../../redux/interfaces/interfaces";
+import { Room } from "../../redux/interfaces/interfaces";
 import RoomsCSS from "./Rooms.module.css";
 import Header from "../../components/Header/Header";
 import RoomCard from "../../components/RoomCard/RoomCard";
 
-const Room = () => {
-	const [rooms, setRooms] = useState<Rooms[]>([]);
+const Rooms = () => {
+	const [rooms, setRooms] = useState<Room[]>([]);
 
 	const {
 		data: roomsData,
@@ -32,4 +32,4 @@ const Room = () => {
 	);
 };
 
-export default Room;
+export default Rooms;

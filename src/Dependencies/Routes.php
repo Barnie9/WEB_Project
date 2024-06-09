@@ -6,6 +6,7 @@ use App\Controller\Room;
 use App\Controller\Matter;
 use App\Controller\Event;
 
+
 return static function($app)
 {
     $app->post('/login', User\Login::class);
@@ -16,6 +17,7 @@ return static function($app)
         $app->post('', User\Create::class);
         $app->put('/{id}', User\Update::class);
         $app->delete('/{id}', User\Delete::class);
+        $app->get('/{id}/groups', User\GetGroupsById::class);
     });
 
     $app->group('/groups', function () use ($app): void {
@@ -38,6 +40,7 @@ return static function($app)
         $app->get('', Event\GetAll::class);
         $app->get('/{id}', Event\GetById::class);
         $app->post('', Event\Create::class);
+        $app->post('/filtered', Event\GetByIdFiltered::class);
         $app->put('/{id}', Event\Update::class);
         $app->delete('/{id}', Event\Delete::class);
     });

@@ -11,7 +11,7 @@ import RoomDetails from "./pages/RoomDetails/RoomDetails";
 import Groups from "./pages/Groups/Groups";
 import GroupDetails from "./pages/GroupDetails/GroupDetails";
 import Users from "./pages/Users/Users";
-
+import Events from "./pages/Events/Events";
 import { Layout as UserLayout } from "./pages/Layout";
 
 const DefaultRoutes = () => {
@@ -38,6 +38,7 @@ const AdminRoutes = () => {
 					<Route path="groups" element={<Groups />} />
 					<Route path="group/:id" element={<GroupDetails />} />
 					<Route path="users" element={<Users />} />
+					<Route path="events" element={<Events />} />
 				</Route>
 				<Route path="*" element={<PageNotFound />} />
 			</Routes>

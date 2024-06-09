@@ -3,6 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\Groups; // Make sure to import the Group class
+use PDO;
+use PDOException;
 
 final class UserRepository extends BaseRepository
 {
@@ -102,5 +105,18 @@ final class UserRepository extends BaseRepository
             throw $e; // Rethrow the exception to be handled elsewhere
         }
     
+    }
+
+    public function getUserGroups(int $userId): array
+    {
+        $query = '
+            SELECT g.id 
+            FROM groups g
+            JOIN memberships m ON g.id = m.group_id
+            WHERE m.user_id = :userId
+        ';
+        $statement = $this->db->prepare($query);
+        $statement->execute(['userId' => $userId]);
+        return $statement->fetchAll(PDO::FETCH_COLUMN); // Fetch the IDs as an array
     }
 }

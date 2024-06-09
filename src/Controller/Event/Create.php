@@ -51,7 +51,7 @@ final class Create extends BaseController
     {
         $event = $request->getParsedBody();
 
-        if (!isset($event['matterId'], $event['teacherId'], $event['groupId'], $event['roomId'], $event['startDate'], $event['startTime'], $event['endTime'], $event['type']))
+        if (!isset($event['matterId'], $event['teacherId'], $event['groupId'], $event['roomId'],  $event['startTime'], $event['endTime'], $event['type']))
         {
             return $this->jsonResponse($response, 'error', 'Bad request', 400);
         }

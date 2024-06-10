@@ -36,6 +36,26 @@ if exist package.json (
     npm install
 )
 
+:: Rularea scriptului PHP pentru a testa conexiunea la baza de date
+cd ..
+cd src/Dependencies
+
+php -r "
+require 'Database.php';
+"
+
+cd ..
+cd Seed
+
+:: Rularea fisierului de seed
+php -r "
+require 'Seed.php';
+"
+
+
+:: Rularea scriptului PHP pentru a testa conexiunea la baza de date
+php -f Database.php
+
 :: Mesaj de finalizare
 echo Configurarea proiectului %PROJECT_NAME% a fost finalizată cu succes!
 

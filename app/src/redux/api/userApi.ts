@@ -37,6 +37,10 @@ export const userApi = createApi({
             }),
             invalidatesTags: ["Users"],
         }),
+        getUserGroups: builder.query<IResponse, number>({
+            query: (id) => `users/${id}/groups`,
+            providesTags: ["User"],
+        }),
     }),
 });
 
@@ -46,4 +50,5 @@ export const {
     useAddUserMutation,
     useUpdateUserMutation,
     useDeleteUserMutation,
+    useGetUserGroupsQuery,
 } = userApi;

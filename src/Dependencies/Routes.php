@@ -44,6 +44,7 @@ return static function($app)
         $app->put('/{id}', Event\Update::class);
         $app->delete('/{id}', Event\Delete::class);
     });
+
     $app->group('/matters', function () use ($app): void {
         $app->get('', Matter\GetAll::class);
         $app->get('/{id}', Matter\GetById::class);
@@ -51,6 +52,9 @@ return static function($app)
         $app->put('/{id}', Matter\Update::class);
         $app->delete('/{id}', Matter\Delete::class);
     });
+
+    // $app->post('/filtered', Event\GetByIdFiltered::class);
+
     return $app;
 };
 

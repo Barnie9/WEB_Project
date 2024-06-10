@@ -76,15 +76,19 @@ final class EventRepository extends BaseRepository
         $query = "
             SELECT * 
             FROM events 
-            WHERE group_id IN ($inQuery)
-            AND start_time >= ?
-            AND end_time <= ?
+            WHERE group_id IN (:groupIds)
+            AND start_time >= :startDate
+            AND end_time <= :endDate
         ";
 
         $statement = $this->db->prepare($query);
-        $params = array_merge($groupIds, [$startDate, $endDate]);
-        $statement->execute($params);
-        
-        return $statement->fetchAll(PDO::FETCH_CLASS, Event::class);
+        // $params = array_merge($groupIds, [$startDate, $endDate]);
+        $statement->execute([
+            'groupIds' => $inQuery,
+            'startDate' => $startDate,
+            'endDate' => $endDate
+        ]);
+
+        return $statement->fetchAll();
     }
 }

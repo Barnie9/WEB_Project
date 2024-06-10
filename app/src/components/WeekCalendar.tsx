@@ -1,11 +1,17 @@
-import { useGetAllEventsQuery } from "../redux/api/eventApi";
+import { useLayoutEffect } from "react";
+import {
+	useGetAllEventsQuery,
+	useGetFilteredEventsMutation,
+} from "../redux/api/eventApi";
+import { useGetUserGroupsQuery } from "../redux/api/userApi";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrentSelectedDate } from "../redux/slices/dateSlice";
+import { selectUser } from "../redux/slices/userSlice";
 import {
 	getWeekDaysFromCurrentWeek,
 	// generateCellsList,
-    getSundayFromCurrentWeek,
-    getSaturdayFromCurrentWeek,
+	getSundayFromCurrentWeek,
+	getSaturdayFromCurrentWeek,
 } from "../utils";
 import DayHeader from "./DayHeader";
 // import EmptyCell from "./EmptyCell";
@@ -14,18 +20,32 @@ import HourDisplay from "./HourDisplay";
 
 const WeekCalendar = () => {
 	const currentSelectedDate = useAppSelector(selectCurrentSelectedDate);
+	const user = useAppSelector(selectUser);
 
-	const weekDays =
-		getWeekDaysFromCurrentWeek(currentSelectedDate);
+	const weekDays = getWeekDaysFromCurrentWeek(currentSelectedDate);
 
 	const hours = Array.from({ length: 23 }, (_, i) => i + 1);
 
 	// const emptyCells = generateCellsList(2, 290, 3, 9);
 
-	// query ul de evenimente, dar cu filtre de data?
-	// const { data: calendarEntries, isSuccess: calendarEntriesIsSuccess } = useGetFilteredCalendarEntriesQuery();
+	const { data: groupIds, isSuccess: groupIdsIsSuccess } =
+		useGetUserGroupsQuery(user!.id);
+	const [getFilteredEvents, { data: events, isSuccess: eventsIsSuccess }] =
+		useGetFilteredEventsMutation();
 
-	const { data: events, isSuccess: eventsIsSuccess } = useGetAllEventsQuery();
+	useLayoutEffect(() => {
+		if (groupIdsIsSuccess) {
+			getFilteredEvents({
+				groupIds: groupIds!.message,
+				startDate:
+					getSundayFromCurrentWeek(currentSelectedDate).toDate(),
+				endDate:
+					getSaturdayFromCurrentWeek(currentSelectedDate).toDate(),
+			});
+		}
+	}, [groupIdsIsSuccess, currentSelectedDate]);
+
+	// const { data: events, isSuccess: eventsIsSuccess } = useGetAllEventsQuery();
 
 	return (
 		<div
@@ -69,12 +89,14 @@ const WeekCalendar = () => {
 				return <EmptyCell key={"empty-cell-" + index} cell={cell} />;
 			})} */}
 
-            {eventsIsSuccess && events.message.map((event, index) => {
-                return <EventCard key={"event-card-" + index} event={event} />
-            })}
+			{eventsIsSuccess &&
+				events.message.map((event, index) => {
+					return (
+						<EventCard key={"event-card-" + index} event={event} />
+					);
+				})}
 		</div>
 	);
 };
 
 export default WeekCalendar;
-
